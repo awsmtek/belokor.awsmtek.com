@@ -1,8 +1,18 @@
 {
-    "name": "belokor", "version": "0.0.1",
+    "name": "belokor", "version": "0.0.3",
 
     "scripts": {
-        "start": "gulp"
+        "install": "bower install",
+        "start": "node --harmony index.js",
+        "test": "mocha --harmony --reporter spec test.js"
+    },
+
+    "dependencies": {
+        "koa": "latest",
+        "koa-router": "latest",
+        "koa-static": "latest",
+        "koa-bodyparser": "latest",
+        "koa-logger": "latest"
     },
 
     "devDependencies": {
@@ -11,7 +21,10 @@
         "gulp-uglify": "latest",
         "gulp-rename": "latest",
         "gulp-less": "latest",
-        "gulp-jade": "latest"
+        "gulp-jade": "latest",
+        "mocha": "latest",
+        "chai": "latest",
+        "supertest": "latest"
     },
 
     "private": true

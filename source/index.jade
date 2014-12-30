@@ -1,5 +1,5 @@
 doctype html
-html(lang='ru')
+html(lang='ru', ng-app="app")
 
     head
 
@@ -8,7 +8,66 @@ html(lang='ru')
         link(rel='stylesheet', href='styles/index.css')
         link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Philosopher:400,700&subset=latin,cyrillic')
 
+        script(src='bower_components/angular/angular.min.js')
+        script(src='bower_components/angular-route/angular-route.min.js')
+
+        script.
+
+            angular.module('app', ['ngRoute'])
+
+                .config(function ($routeProvider) {
+                    $routeProvider
+                        .when('/', {
+                            name: 'index',
+                            template: '',
+                        })
+                        .when('/works', {
+                            name: 'works',
+                            template: '',
+                        })
+                        .when('/reviews', {
+                            name: 'reviews',
+                            template: '',
+                        })
+                        .when('/contacts', {
+                            name: 'contacts',
+                            template: '',
+                        })
+                        .otherwise({
+                            redirectTo: '/',
+                        })
+                    ;
+                })
+
+                .run(function ($rootScope) {
+                    $rootScope.$on('$routeChangeSuccess', function ($evt, route) {
+                        $rootScope.route= route
+                    })
+
+                    $rootScope.contact= {
+                        $disabled: false,
+                        name: {
+                            value: null,
+                        },
+                        email: {
+                            value: null,
+                        },
+                        message: {
+                            value: null,
+                        },
+                        send: function () {
+                            this.$disabled= true
+                            console.log('send', this)
+                        }
+                    }
+                })
+
+            ;
+
+
     body.app
+
+        div(ng-view)
 
 
 
@@ -38,11 +97,11 @@ html(lang='ru')
                                 img.b-logo__logo_shadow(src='content/ico-logo4.svg')
                                 img.b-logo__logo(src='content/ico-logo4.svg')
 
-                            u Валерий Х.
+                            u <span>Валерий Х</span>.
 
                     nav.app-head__nav
-                        a(href='#/work') Работы
-                        a(href='#/work') Отзывы
+                        a(href='#/works') Работы
+                        a(href='#/reviews') Отзывы
                         a(href='#/contacts') Контакты
 
 
@@ -51,7 +110,7 @@ html(lang='ru')
 
             .container
 
-                h1 <span>Neque </span><span>porro </span><span>quisquam </span><span>est </span><span>qui </span><span>dolorem </span><span>ipsum </span><span>quia </span><span>dolor </span><span>sit </span><span>amet, </span><span>consectetur, </span><span>adipisci </span><span>velit!</span>
+                h1 <span>Neque </span><span>porro </span><span>quisquam </span><span>est </span><span>qui</span><br><span>dolorem </span><span>ipsum </span><span>quia </span><span>dolor </span><span>sit </span><span>amet</span><b style='margin-right:-0.17em'>,</b><br><span>adipisci </span><span>velit</span><b style='margin-right:-0.17em'>.</b>
 
             .container
 
@@ -88,7 +147,28 @@ html(lang='ru')
                         .b-work__item
                             .b-work-item item
 
+        section.app__over.app-over(ng-show="route.name=='works'")
+            .app-over__inner: .container
 
+                h1 <span>Скоро</span>.
+
+        section.app__over.app-over(ng-show="route.name=='reviews'")
+            .app-over__inner: .container
+
+                h1 <span>Скоро</span>.
+
+
+        section.app__over.app-over(ng-show="route.name=='contacts'")
+            .app-over__inner: .container
+
+                h1 <span>Счастливого и доброго</span><br><span>нового года, дорогие друзья</span>!<br><span>Напишите мне</span> — ?
+
+                .b-contacts
+                    form.b-contacts__form(ng-submit="contact.send()")
+                        input(type='name', ng-model="contact.name.value", placeholder="Как вас зовут?", required, autocomplete="on")
+                        input(type='email', ng-model="contact.email.value", placeholder="На какой email ответить?", autocomplete="on")
+                        textarea(name="message", ng-model="contact.message.value", rows="5", placeholder="", required)
+                        button(type="submit", ng-disabled="contact.$disabled") Написать
 
         footer.app__foot
 

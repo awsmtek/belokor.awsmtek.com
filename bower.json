@@ -1,5 +1,5 @@
 {
-    "name": "belokor", "version": "0.0.1",
+    "name": "belokor", "version": "0.0.3",
 
     "dependencies": {
         "angular": "latest",

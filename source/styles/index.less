@@ -1,0 +1,228 @@
+* {
+    box-sizing: border-box;
+}
+:before,
+:after {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+}
+
+.container {
+    width: 940px;
+    margin: 0 auto;
+}
+
+.b-row {
+    display: block;
+    margin: 0 -15px;
+}
+.b-row:before,
+.b-row:after {
+    display: table; content: '';
+    float: none;
+}
+.b-row:after {
+    clear: both;
+}
+
+    .b-row__col {
+        float: left;
+        padding: 15px;
+    }
+    .b-row__col_4 {
+        width: (100%) / 3;
+    }
+    .b-row__col_12 {
+        width: 100%;
+    }
+
+.app {
+    position: relative;
+
+    &__head {
+        position: absolute; z-index: 3;
+        top: 0; left: 0;
+        width: 100%;
+        height: 80px;
+
+        & h1 {
+            margin: 0;
+            font-family: 'Philosopher', sans-serif;
+        }
+
+        & nav {
+            margin: 0;
+        }
+
+    }
+
+    &__sect {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 80px 0 30px;
+
+        & h1 {
+            margin: 2em 0;
+            font-family: 'Philosopher', sans-serif;
+            font-size: 3em;
+            text-align: center;
+            @media (max-height: 760px) {
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+        }
+
+        & p {
+            width: 68%;
+            margin: 0;
+            font-family: 'Philosopher', sans-serif;
+            font-size: 1.5em;
+        }
+    }
+
+    &__foot {
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%;
+        height: 30px;
+
+        & p {
+            margin: 0;
+        }
+    }
+}
+
+.app-head {
+    display: table;
+    width: 100%;
+    height: 80px;
+    border-bottom: 4px solid #000;
+
+    &__brand,
+    &__nav {
+        display: table-cell;
+        padding: 30px 0;
+        vertical-align: baseline;
+    }
+
+    &__brand {
+        position: relative; top: 15px;
+        width: 50%;
+        line-height: 50px;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size: 3em;
+        text-align: left;
+
+        & > a,
+        & > a > u {
+            text-decoration: none;
+        }
+        & > a {
+            display: inline-block;
+        }
+        & > a > u {
+            position: relative; top: -5px;
+        }
+        & > a > .b-logo {
+            display: block;
+            position: absolute; top: 0; right: -25px;
+            width: 50px;
+        }
+        & > a > .b-logo__shadow {
+            display: block;
+            position: absolute; top: -50px; right: -100px;
+            width: 200px;
+            opacity: 0.1;
+        }
+
+        .b-logo {
+
+            &__logo {
+                display: block;
+                position: absolute; top: 0; right: -25px;
+                width: 50px;
+            }
+            &__logo_shadow {
+                display: block;
+                position: absolute; top: -50px; right: -100px;
+                width: 200px;
+                opacity: 0.1;
+            }
+
+            &_2 &__logo {
+
+            }
+            &_2 &__logo_shadow {
+
+            }
+        }
+    }
+
+    &__nav {
+        text-align: right;
+
+        & a {
+            display: inline-block;
+            margin-left: 15px;
+        }
+    }
+}
+
+
+.b-feat {
+    &__item {
+        margin: 0;
+        padding: 2em 0;
+        border-top: 4px solid #e2e2e2;
+        & > img {
+            display: block;
+            width: 37%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        & > figcaption {
+            font-family: 'Philosopher', sans-serif;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+}
+
+.b-work {
+    padding: 2em 1em;
+    background-color: #f2f2f2;
+    box-shadow: inset 0 0 8px -4px;
+
+    &__inner {
+
+    }
+
+    &__items {
+        display: table;
+        width: 100%;
+    }
+
+    &__item {
+        display: table-cell;
+        width: 20%;
+        padding: 0 1em;
+    }
+}
+
+.b-work-item {
+    background-color: #e2e2e2;
+}

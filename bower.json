@@ -1,0 +1,11 @@
+{
+    "name": "belokor", "version": "0.0.1",
+
+    "dependencies": {
+        "angular": "latest",
+        "angular-route": "latest",
+        "angularytics": "latest"
+    },
+
+    "private": true
+}

@@ -10,10 +10,11 @@ html(lang='ru', ng-app="app")
 
         script(src='bower_components/angular/angular.min.js')
         script(src='bower_components/angular-route/angular-route.min.js')
+        script(src='bower_components/angular-resource/angular-resource.min.js')
 
         script.
 
-            angular.module('app', ['ngRoute'])
+            angular.module('app', ['ngRoute','ngResource'])
 
                 .config(function ($routeProvider) {
                     $routeProvider
@@ -39,27 +40,26 @@ html(lang='ru', ng-app="app")
                     ;
                 })
 
-                .run(function ($rootScope) {
+                .run(function ($rootScope, Contact) {
                     $rootScope.$on('$routeChangeSuccess', function ($evt, route) {
                         $rootScope.route= route
                     })
 
-                    $rootScope.contact= {
-                        $disabled: false,
-                        name: {
-                            value: null,
-                        },
-                        email: {
-                            value: null,
-                        },
-                        message: {
-                            value: null,
-                        },
-                        send: function () {
-                            this.$disabled= true
-                            console.log('send', this)
-                        }
+                    $rootScope.contact= new Contact
+                    $rootScope.contact.$resolved= true
+
+                    $rootScope.contactSave= function (contact, ContactForm) {
+                        ContactForm.$setPristine(true)
+                        contact.$save(function (data) {
+                            contact.message= null
+                        }, function () {
+                            ContactForm.$setPristine(false)
+                        })
                     }
+                })
+
+                .factory('Contact', function ($resource) {
+                    return $resource('/api/v1/contact')
                 })
 
             ;
@@ -161,14 +161,14 @@ html(lang='ru', ng-app="app")
         section.app__over.app-over(ng-show="route.name=='contacts'")
             .app-over__inner: .container
 
-                h1 <span>Счастливого и доброго</span><br><span>нового года, дорогие друзья</span>!<br><span>Напишите мне</span> — ?
+                h1 <span>Счастливого и доброго</span><br><span>нового года, дорогие друзья</span><b style="margin-right:-0.17em">!</b><br><span>Напишите мне</span><b style="margin-right:-1.5em"> — ?</b>
 
                 .b-contacts
-                    form.b-contacts__form(ng-submit="contact.send()")
-                        input(type='name', ng-model="contact.name.value", placeholder="Как вас зовут?", required, autocomplete="on")
-                        input(type='email', ng-model="contact.email.value", placeholder="На какой email ответить?", autocomplete="on")
-                        textarea(name="message", ng-model="contact.message.value", rows="5", placeholder="", required)
-                        button(type="submit", ng-disabled="contact.$disabled") Написать
+                    form.b-contacts__form(name="ContactForm", ng-submit="contactSave(contact, ContactForm)")
+                        input(type='text', name="name", ng-model="contact.name", placeholder="Как вас зовут?", autocomplete="on")
+                        input(type='email', name="email", ng-model="contact.email", placeholder="На какой email ответить?", autocomplete="on")
+                        textarea(name="message", ng-model="contact.message", rows="5", placeholder="", required)
+                        button(type="submit", ng-disabled="ContactForm.$invalid || (ContactForm.name.$invalid&&ContactForm.email.$invalid) || ContactForm.$pristine") Написать
 
         footer.app__foot
 

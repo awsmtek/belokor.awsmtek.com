@@ -1,5 +1,18 @@
 {
-    "name": "belokor", "version": "0.0.3",
+    "name": "belokor", "version": "0.1.1",
+
+    "config": {
+        "mailer": {
+            "to": ["???????"],
+            "transport": {
+                "service": "Gmail",
+                "auth": {
+                    "user": "???????",
+                    "pass": "???????"
+                }
+            }
+        }
+    },
 
     "scripts": {
         "install": "bower install",

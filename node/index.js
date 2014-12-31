@@ -14,3 +14,11 @@ app.use(AppStatic(path.resolve(__dirname,'../release')))
 app.use(AppLogger())
 
 app.use(AppBodyparser())
+
+
+
+var ContactApi= require('./handlers/Api/Contact')
+
+app.use(
+    ContactApi().middleware()
+)

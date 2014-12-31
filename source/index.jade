@@ -165,8 +165,8 @@ html(lang='ru', ng-app="app")
 
                 .b-contacts
                     form.b-contacts__form(name="ContactForm", ng-submit="contactSave(contact, ContactForm)")
-                        input(type='text', name="name", ng-model="contact.name", placeholder="Как вас зовут?", autocomplete="on")
-                        input(type='email', name="email", ng-model="contact.email", placeholder="На какой email ответить?", autocomplete="on")
+                        input(type='text', name="name", ng-model="contact.name", placeholder="Как вас зовут?", required, autocomplete="on")
+                        input(type='email', name="email", ng-model="contact.email", placeholder="На какой email ответить?", required, autocomplete="on")
                         textarea(name="message", ng-model="contact.message", rows="5", placeholder="", required)
                         button(type="submit", ng-disabled="ContactForm.$invalid || (ContactForm.name.$invalid&&ContactForm.email.$invalid) || ContactForm.$pristine") Написать
 

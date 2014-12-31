@@ -15,7 +15,7 @@ exports.sendContact= function (data) { return function (done) {
     ].join(' ')
 
     var message= [
-        'Со страницы «Контакты» (http://belokor.awsmtek.com/#/contacts) отправлено сообщение ('+ (new Date()).toUTCString() +'):',
+        'Со страницы «Контакты» (http://belokor.awesome.in.net/#/contacts) отправлено сообщение ('+ (new Date()).toUTCString() +'):',
         '\n\n',
         data.message,
         '', '--',

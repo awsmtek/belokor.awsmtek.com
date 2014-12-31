@@ -17,7 +17,7 @@ function ContactApi() {
             if (data && (data.name || data.email) && data.message) {
 
                 this.body= yield contactService.sendContact({
-                    name: data.name.substring(0,37).trim(),
+                    name: (data.name) ? data.name.substring(0,37).trim() : null,
                     email: (data.email) ? data.email.trim() : null,
                     message: data.message.trim(),
                 })
@@ -29,6 +29,7 @@ function ContactApi() {
             }
 
         } catch (err) {
+            console.error(err)
             this.status= 500 // Bad Request
         }
     })
